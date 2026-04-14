@@ -17,8 +17,10 @@ public class Requirement {
     @Id
     private UUID id;
 
+    @Column(nullable = false)
     private String type;
 
+    @Column(nullable = false)
     private String requirement;
 
     @ManyToOne
