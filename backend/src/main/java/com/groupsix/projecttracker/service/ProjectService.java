@@ -35,7 +35,7 @@ public class ProjectService {
         project.setOwner(projectBody.getOwner());
         project.setCreatedAt(Instant.now());
         project.setUpdatedAt(Instant.now());
-        project.setMembers(projectBody.getMembers());
+        project.setMembers(new ArrayList<>());
 
         try {
             Project savedProject = projectRepository.save(project);

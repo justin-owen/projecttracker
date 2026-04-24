@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { getProjects } from "../api/project";
+import ProjectForm from "./ProjectForm";
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState([]);
+  const [creatingProject, setCreatingProject] = useState(false);
 
   useEffect(() => {
     async function loadProjects() {
@@ -21,6 +23,8 @@ export default function ProjectsPage() {
   return (
     <div>
       <h1>Projects</h1>
+        <button onClick={() => setCreatingProject(true)}>Create Project</button>
+        {creatingProject && <ProjectForm toggleForm={setCreatingProject}/>}
 
       {projects.map((project) => (
         <div key={project.id}>
