@@ -30,6 +30,7 @@ export default function ProjectsPage() {
         <div key={project.id}>
           <h2>{project.name}</h2>
           <p>{project.description}</p>
+          <p>{project.owner}</p>
         </div>
       ))}
     </div>
