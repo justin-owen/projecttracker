@@ -31,7 +31,7 @@ public class RequirementService {
     public RequirementDto createRequirement(RequirementRequestDto requirementRequest){
         Requirement requirement = new Requirement();
         requirement.setId(UUID.randomUUID());
-        requirement.setRequirement(requirement.getRequirement());
+        requirement.setRequirement(requirementRequest.getRequirement());
         requirement.setType(requirementRequest.getType());
         try {
             requirement.setProject(projectRepository.findById(requirementRequest.getProjectId()).orElseThrow());

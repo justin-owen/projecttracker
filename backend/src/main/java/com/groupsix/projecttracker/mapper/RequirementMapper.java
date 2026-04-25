@@ -10,6 +10,7 @@ public class RequirementMapper {
         if (requirement == null) return null;
 
         return RequirementDto.builder()
+                .id(requirement.getId())
                 .type(requirement.getType())
                 .requirement(requirement.getRequirement())
                 .build();

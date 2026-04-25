@@ -3,8 +3,10 @@ package com.groupsix.projecttracker.service;
 import com.groupsix.projecttracker.dto.EffortDto;
 import com.groupsix.projecttracker.entity.EffortEntity;
 import com.groupsix.projecttracker.entity.Project;
+import com.groupsix.projecttracker.entity.Requirement;
 import com.groupsix.projecttracker.repository.EffortRepository;
 import com.groupsix.projecttracker.repository.ProjectRepository;
+import com.groupsix.projecttracker.repository.RequirementRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ public class EffortService {
 
     private final EffortRepository effortRepository;
     private final ProjectRepository projectRepository;
+    private final RequirementRepository requirementRepository;
 
     public List<EffortDto> getAllEffortsByProject(UUID projectId) {
         return effortRepository.findByProjectId(projectId)
@@ -40,6 +43,10 @@ public class EffortService {
         effort.setEntryType(effortDto.getEntryType());
         effort.setEntryDate(effortDto.getEntryDate());
         effort.setProject(project);
+        if (effortDto.getRequirementId() != null) {
+            Requirement req = requirementRepository.findById(effortDto.getRequirementId()).orElse(null);
+            effort.setRequirement(req);
+        }
 
         EffortEntity savedEffort = effortRepository.save(effort);
         return toDto(savedEffort);
@@ -58,6 +65,12 @@ public class EffortService {
         effort.setEntryType(effortDto.getEntryType());
         effort.setEntryDate(effortDto.getEntryDate());
         effort.setProject(project);
+        if (effortDto.getRequirementId() != null) {
+            Requirement req = requirementRepository.findById(effortDto.getRequirementId()).orElse(null);
+            effort.setRequirement(req);
+        } else {
+            effort.setRequirement(null);
+        }
 
         EffortEntity updatedEffort = effortRepository.save(effort);
         return toDto(updatedEffort);
@@ -95,6 +108,7 @@ public class EffortService {
                 .entryType(effort.getEntryType())
                 .entryDate(effort.getEntryDate())
                 .projectId(effort.getProject().getId())
+                .requirementId(effort.getRequirement() != null ? effort.getRequirement().getId() : null)
                 .build();
     }
 }

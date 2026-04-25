@@ -36,4 +36,8 @@ public class EffortEntity {
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
+
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "requirement_id", nullable = true)
+    private Requirement requirement;
 }

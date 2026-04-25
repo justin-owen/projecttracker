@@ -30,6 +30,7 @@ public class RiskService {
 
     public RiskDto createRisk(RiskRequestDto riskRequest){
         Risk risk = new Risk();
+        risk.setId(UUID.randomUUID());
         risk.setRisk(riskRequest.getRisk());
         risk.setStatus(riskRequest.getStatus());
         try {

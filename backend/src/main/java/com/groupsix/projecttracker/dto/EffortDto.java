@@ -20,4 +20,5 @@ public class EffortDto {
     private String entryType;
     private LocalDate entryDate;
     private UUID projectId;
+    private UUID requirementId;
 }
