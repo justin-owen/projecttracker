@@ -10,6 +10,7 @@ public class RiskMapper {
         if (risk == null) return null;
 
         return RiskDto.builder()
+                .id(risk.getId())
                 .risk(risk.getRisk())
                 .status(risk.getStatus())
                 .build();
